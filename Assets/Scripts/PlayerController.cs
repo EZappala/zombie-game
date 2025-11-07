@@ -1,3 +1,4 @@
+using System.Linq;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,35 +19,61 @@ public sealed class PlayerController : EntityController
     private Vector3 velocity;
     private bool grounded;
 
+    public InputActionAsset ia { get; private set; }
+    public InputActionMap ia_map { get; private set; }
     private InputAction move;
     private InputAction jump;
 
-    private void OnValidate()
-    {
-        cine_cam = GameObject.FindFirstObjectByType<CinemachineCamera>();
-    }
-
     private void Awake()
     {
+        ia = Instantiate(InputSystem.actions);
+        ia_map = ia.actionMaps.Where(m => m.name == "Player").First();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        if (cine_cam == null)
+        {
+            cine_cam = GameObject.FindFirstObjectByType<CinemachineCamera>();
+        }
+
         character_controller = GetComponent<CharacterController>();
 
-        move = InputSystem.actions.FindAction("Move", true);
-        jump = InputSystem.actions.FindAction("Jump", true);
+        move = ia_map.FindAction("Move", true);
+        jump = ia_map.FindAction("Jump", true);
+#if UNITY_EDITOR
+        move.performed += OnMove;
+        jump.performed += OnJump;
+#endif
     }
+
+#if UNITY_EDITOR
+    private void OnJump(InputAction.CallbackContext context)
+    {
+        Debug.Log("Jumped");
+    }
+
+    private void OnMove(InputAction.CallbackContext context)
+    {
+        Debug.Log("Moved");
+    }
+#endif
+
+    private void Start() { }
 
     private void OnEnable()
     {
-        move?.Enable();
-        jump?.Enable();
+        move.Enable();
+        jump.Enable();
     }
 
     private void OnDisable()
     {
-        move?.Disable();
-        jump?.Disable();
+#if UNITY_EDITOR
+        move.performed -= OnMove;
+        jump.performed -= OnJump;
+#endif
+        move.Disable();
+        jump.Disable();
     }
 
     private void Update()

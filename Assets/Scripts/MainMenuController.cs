@@ -1,36 +1,41 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    private InputAction submit;
+    private InputActionAsset ia;
+    private InputActionMap ia_map;
+    private InputAction attack;
 
     private void Awake()
     {
-        submit = InputSystem.actions.FindAction("Submit");
-        if (submit == null)
+        ia = Instantiate(InputSystem.actions);
+        ia_map = ia.actionMaps.Where(m => m.name == "Player").First();
+        attack = ia_map.FindAction("Attack");
+        if (attack == null)
         {
-            Debug.LogError("No continue action found", this);
+            Debug.LogError("No attack action found", this);
             return;
         }
 
-        submit.performed += OnSubmitPerformed;
+        attack.performed += OnAttackPerformed;
     }
 
-    private void OnSubmitPerformed(InputAction.CallbackContext context)
+    private void OnAttackPerformed(InputAction.CallbackContext context)
     {
         SceneManager.LoadScene("L1");
     }
 
     private void OnEnable()
     {
-        submit.Enable();
+        attack.Enable();
     }
 
     private void OnDisable()
     {
-        submit.performed -= OnSubmitPerformed;
-        submit.Disable();
+        attack.performed -= OnAttackPerformed;
+        attack.Disable();
     }
 }

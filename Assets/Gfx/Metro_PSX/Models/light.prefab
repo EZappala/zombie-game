@@ -136,10 +136,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1666637625434635171}
+  - component: {fileID: 608653773712430700}
   - component: {fileID: 4562597896872919431}
   - component: {fileID: 1116958951984813967}
   - component: {fileID: 3109039247642900706}
-  - component: {fileID: 608653773712430700}
   m_Layer: 0
   m_Name: light
   m_TagString: Untagged
@@ -163,6 +163,27 @@ Transform:
   - {fileID: 2696643662608037695}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
+--- !u!114 &608653773712430700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5182843671784201356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4444caa40d694a848ae0b6464cc53258, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightController
+  l: {fileID: 8622708822767556182}
+  flicker_enabled: 1
+  is_arrhythmic: 1
+  flicker_min: 0
+  flicker_max: 10
+  is_on: 1
+  flicker_pattern: []
+  flicker_speed: 2
+  flicker_randomness: 0.05
 --- !u!33 &4562597896872919431
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -241,23 +262,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3958770277684823056, guid: 12e624cc3f24adc41ab28ad33e66215b, type: 3}
---- !u!114 &608653773712430700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5182843671784201356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4444caa40d694a848ae0b6464cc53258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LightController
-  l: {fileID: 8622708822767556182}
-  flicker_enabled: 1
-  is_arrhythmic: 1
-  flicker_min: 0
-  flicker_max: 10
-  flicker_pattern: []
-  flicker_speed: 2
-  flicker_randomness: 0.05

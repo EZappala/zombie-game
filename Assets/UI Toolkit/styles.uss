@@ -2,7 +2,7 @@
 }
 
 .score-texts {
-    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/Shrikhand/Shrikhand-Regular.ttf?fileID=12800000&guid=239732382d5f16d44bfa1678a0208f15&type=3#Shrikhand-Regular");
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/Fonts/mgs1-fonts/MGS1%20HUD.ttf?fileID=12800000&guid=0082c88c1226b094bb3e5845f3ff0c08&type=3#MGS1 HUD");
     -unity-font-style: normal;
     color: rgb(229, 229, 229);
     font-size: 28px;
@@ -11,7 +11,7 @@
 }
 
 .bg-items {
-    background-color: rgb(174, 149, 46);
+    background-color: rgba(174, 149, 46, 0);
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;

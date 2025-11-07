@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.SceneManagement.SceneManager;
 
 public class KeyController : MonoBehaviour
 {
@@ -15,11 +16,24 @@ public class KeyController : MonoBehaviour
     private float bob_amplitude = 0.1f;
 
     private Vector3 startPosition;
+    private GameManager manager;
 
-    private void Start()
+    private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+        {
+            Debug.LogError($"Player is null in scene {GetActiveScene().name}");
+        }
+
         player_comp = player.GetComponent<Player>();
+        if (player_comp == null)
+        {
+            Debug.LogError("Player game object has no player comp");
+        }
+
+        manager = GameObject.FindFirstObjectByType<GameManager>();
+
         startPosition = transform.position;
     }
 
@@ -38,5 +52,7 @@ public class KeyController : MonoBehaviour
             return;
 
         player_comp.HasKey = true;
+        manager.update_score();
+        Destroy(gameObject, 1f);
     }
 }
